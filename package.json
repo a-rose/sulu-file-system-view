@@ -12,6 +12,10 @@
       {
         "key": "right",
         "function": "changeDirectory"
+      },
+      {
+        "key": "ctrl+h",
+        "function": "toggleShowHiddeFiles"
       }
     ]
   },

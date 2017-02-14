@@ -17,6 +17,7 @@ var View = function(id) {
 	this.path = cfg.path;
 	this.sep = require("path").sep;
 	this.history = [this.path];
+	this.showHiddenFiles = true;
 	return this;
 };
 
@@ -243,10 +244,15 @@ View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 	}
 };
 
-View.prototype.renderRows = function(fileSystemItems, showFullPath) {
+View.prototype.renderRows = function(fileSystemItems, showFullPath, showHiddenFiles) {
 	var rows = [];
 	for (var i = 0; i < fileSystemItems.length; i++) {
 		var fileSystemItem = fileSystemItems[i];
+
+		if(showHiddenFiles === false && fileSystemItem.name[0] === '.' && fileSystemItem.name !== ".."){
+			continue;
+		}
+
 		fileSystemItem.rowId = i;
 		rows.push(this.renderRow(fileSystemItem, showFullPath));
 	}
@@ -259,7 +265,7 @@ View.prototype.bind = function(){
 	if (!self.data){
 		self.dir(function() {
 			self.cluster = new window.Clusterize({
-				rows: self.renderRows(self.data),
+				rows: self.renderRows(self.data, null, self.showHiddenFiles),
 				scrollId: "scrollArea" + self.id,
 				contentId: "contentArea" + self.id,
 				afterInsertToDOM : function(data){
@@ -291,7 +297,7 @@ View.prototype.bind = function(){
 
 View.prototype.updateGridViewData = function(isHistoryJump, showFullPath){
 	var self = this;
-	self.cluster.update(self.renderRows(self.data, showFullPath));
+	self.cluster.update(self.renderRows(self.data, showFullPath, self.showHiddenFiles));
 	self.el.set("path", self.path.split(self.sep));
 	self.el.set("xpath", []);
 	for(var i = 0; i < self.el.get("path").length; i++){

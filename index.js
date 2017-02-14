@@ -36,6 +36,21 @@ Command.prototype.historyJumpBackward = function historyJumpBackward() {
 	return false
 };
 
+
+Command.prototype.toggleShowHiddeFiles = function toggleShowHiddeFiles() {
+	var view = this.GUI.activeView().model;
+	if(view.showHiddenFiles === undefined ){
+		view.showHiddenFiles = 1;
+	}
+	else{
+		view.showHiddenFiles = !view.showHiddenFiles;
+	}
+
+	view.updateGridViewData(false);
+	return false;
+};
+
+
 Command.prototype.historyJumpForward = function historyJumpForward() {
 	var view = this.GUI.activeView().model;
 	var history = view.history;
