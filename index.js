@@ -39,13 +39,7 @@ Command.prototype.historyJumpBackward = function historyJumpBackward() {
 
 Command.prototype.toggleShowHiddeFiles = function toggleShowHiddeFiles() {
 	var view = this.GUI.activeView().model;
-	if(view.showHiddenFiles === undefined ){
-		view.showHiddenFiles = 1;
-	}
-	else{
-		view.showHiddenFiles = !view.showHiddenFiles;
-	}
-
+	view.showHiddenFiles = !view.showHiddenFiles;
 	view.updateGridViewData(false);
 	return false;
 };
