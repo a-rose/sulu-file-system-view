@@ -15,7 +15,7 @@
       },
       {
         "key": "ctrl+h",
-        "function": "toggleShowHiddeFiles"
+        "function": "toggleShowHiddenFiles"
       }
     ]
   },
