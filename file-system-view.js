@@ -257,6 +257,7 @@ View.prototype.renderRows = function(fileSystemItems, showFullPath, showHiddenFi
 		rows.push(this.renderRow(fileSystemItem, showFullPath));
 	}
 	this.el.set("fileCount", rows.length - 1);
+	this.el.set("showHiddenFilesState", showHiddenFiles ? "Showing hidden files" : "Hidden files not shown");
 	return rows;
 };
 
