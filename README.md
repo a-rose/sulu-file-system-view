@@ -1,4 +1,4 @@
-# SULU Application Settings
+# SULU File System View
 [![NPM version][npm-image]][npm-url]
 [![SULU Package][sulu-package-image]][sulu-package-url]  
  
