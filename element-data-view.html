@@ -33,7 +33,7 @@
 		 
 				<div>
 					<span>[[selectedFileCount]]</span>/<span>[[fileCount]]</span> 
-					<span>[[showHiddenFilesState]]</span>
+					<span id="{{showHiddenFilesStateID}}" class="fa"></span>
 				</div>
 		</div> 
 		<div class="clusterize"> 
@@ -60,6 +60,7 @@
 					var id = this.getAttribute("view-id");
 					this.scrollAreaID = "scrollArea" + id;
 					this.contentAreaID = "contentArea" + id;
+					this.showHiddenFilesStateID = "showHiddenFilesState" + id;
 
 					var fileSystemView = new FileSystemView(id);
 					this.sep = require("path").sep;

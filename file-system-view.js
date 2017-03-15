@@ -246,18 +246,35 @@ View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 
 View.prototype.renderRows = function(fileSystemItems, showFullPath, showHiddenFiles) {
 	var rows = [];
+	var nbHiddenFiles = 0;
 	for (var i = 0; i < fileSystemItems.length; i++) {
 		var fileSystemItem = fileSystemItems[i];
 
-		if(showHiddenFiles === false && fileSystemItem.name[0] === '.' && fileSystemItem.name !== ".."){
-			continue;
+		if(fileSystemItem.name[0] === '.' && fileSystemItem.name !== "..") {
+			nbHiddenFiles++;
+			if(showHiddenFiles === false){
+				continue;
+			}
 		}
 
 		fileSystemItem.rowId = i;
 		rows.push(this.renderRow(fileSystemItem, showFullPath));
 	}
 	this.el.set("fileCount", rows.length - 1);
-	this.el.set("showHiddenFilesState", showHiddenFiles ? "Showing hidden files" : "Hidden files not shown");
+
+	var el = $("#showHiddenFilesState" + this.id);
+
+	if(showHiddenFiles === true) {
+		el.removeClass("fa-eye-slash");
+		el.addClass("fa-eye");
+		el.attr("title", "Showing hidden files ("+ nbHiddenFiles +" files)");
+	}
+	else {
+		el.removeClass("fa-eye");
+		el.addClass("fa-eye-slash");
+		el.attr("title", "Hidden files not shown ("+ nbHiddenFiles +" files)");
+	}
+
 	return rows;
 };
 
